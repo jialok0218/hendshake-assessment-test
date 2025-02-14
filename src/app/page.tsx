@@ -31,8 +31,13 @@ export default function Home() {
 
   // Function to remove a task by filtering out the one with the given ID
   const removeTask = (id: string) => {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.filter((task) => task.id !== id);
+      localStorage.setItem("tasks", JSON.stringify(updatedTasks));  // Update localStorage immediately
+      return updatedTasks;
+    });
   };
+  
 
   return (
     <Box
